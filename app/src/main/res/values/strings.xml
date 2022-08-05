@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">RecyclerViewApp</string>
+    <string name="name">name</string>
+    <string name="phone_no">phone_no</string>
+    <string name="enter_name">Enter Name</string>
+    <string name="enter_phone_no">Enter Phone No</string>
+    <string name="submit">Submit</string>
+    <string name="todo">TODO</string>
+    <string name="btn">btn</string>
+</resources>
