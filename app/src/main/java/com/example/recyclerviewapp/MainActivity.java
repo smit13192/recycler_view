@@ -57,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
                     Contact contact = new Contact(name.getText().toString(), phone_number.getText().toString());
                     contacts.add(contact);
                     db.addContact(contact);
-                    seeContact();
                     adapter.notifyItemInserted(contacts.size() - 1);
                     dialog.dismiss();
                 } else {
