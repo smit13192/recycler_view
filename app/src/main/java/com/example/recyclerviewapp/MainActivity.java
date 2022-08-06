@@ -8,6 +8,7 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.recyclerviewapp.Adapter.ContactAdapter;
 import com.example.recyclerviewapp.DataBase.ContactDataBase;
@@ -50,12 +51,18 @@ public class MainActivity extends AppCompatActivity {
             Button submit = dialog.findViewById(R.id.submit);
 
             submit.setOnClickListener(view -> {
-                Contact contact = new Contact(name.getText().toString(),phone_number.getText().toString());
-                contacts.add(contact);
-                db.addContact(contact);
-                seeContact();
-                adapter.notifyItemInserted(contacts.size() - 1);
-                dialog.dismiss();
+
+                if (!name.getText().toString().isEmpty() && phone_number.getText().toString().length() == 10) {
+
+                    Contact contact = new Contact(name.getText().toString(), phone_number.getText().toString());
+                    contacts.add(contact);
+                    db.addContact(contact);
+                    seeContact();
+                    adapter.notifyItemInserted(contacts.size() - 1);
+                    dialog.dismiss();
+                } else {
+                    Toast.makeText(this, "Phone Number Must Be 10 Letter && Name Are Not Blank", Toast.LENGTH_SHORT).show();
+                }
             });
             dialog.show();
         });
