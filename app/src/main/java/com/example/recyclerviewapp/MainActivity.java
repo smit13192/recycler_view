@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.recyclerviewapp.Adapter.ContactAdapter;
+import com.example.recyclerviewapp.DataBase.ContactDataBase;
 import com.example.recyclerviewapp.contact.Contact;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -20,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView contactRecyclerView;
     ArrayList<Contact> contacts = new ArrayList<>();
     FloatingActionButton btn;
+    ContactDataBase db;
+    ContactAdapter adapter;
 
 
     @Override
@@ -27,11 +30,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        db = new ContactDataBase(this);
+        seeContact();
+
         btn = findViewById(R.id.add_contact_btn);
         contactRecyclerView = findViewById(R.id.contactRecyclerView);
         contactRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        ContactAdapter adapter = new ContactAdapter(this, contacts);
+        adapter = new ContactAdapter(this, contacts);
 
         contactRecyclerView.setAdapter(adapter);
 
@@ -44,11 +50,18 @@ public class MainActivity extends AppCompatActivity {
             Button submit = dialog.findViewById(R.id.submit);
 
             submit.setOnClickListener(view -> {
-                contacts.add(new Contact(name.getText().toString(), phone_number.getText().toString()));
+                Contact contact = new Contact(name.getText().toString(),phone_number.getText().toString());
+                contacts.add(contact);
+                db.addContact(contact);
+                seeContact();
                 adapter.notifyItemInserted(contacts.size() - 1);
                 dialog.dismiss();
             });
             dialog.show();
         });
+    }
+
+    private void seeContact() {
+        contacts = db.getContact();
     }
 }

@@ -1,6 +1,7 @@
 package com.example.recyclerviewapp.contact;
 
 public class Contact {
+    private int id;
     private String name;
     private String phone_no;
 
@@ -8,6 +9,16 @@ public class Contact {
         this.name = name;
         this.phone_no = phone_no;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Contact(){ }
 
     public String getName() {
         return name;
